@@ -75,3 +75,40 @@ function twoSum(nums, target) {
 let nums = [1, 2, 3, 4, 5];
 let target = 9;
 console.log(twoSum(nums, target));
+//Example No-4:
+/*Write a function to find the longest common prefix string amongst an array of strings.
+If there is no common prefix, return an empty string "".*/
+function longestCommonPrefix(strs) {
+    if (strs.length === 0) {
+        return "";
+    }
+    for (let i = 0; i < strs[0].length; i++) {
+        for (let k = 1; k < strs.length; k++) {
+            if (strs[k].charAt(i) !== strs[0].charAt(i)) {
+                return strs[0].substring(0, i);
+            }
+        }
+    }
+    return strs[0];
+}
+;
+let strs = ["flower", "flow", "flight"];
+console.log(longestCommonPrefix(strs));
+//Another apparoch to solve this problem:
+function longestCommonPrefixes(strs) {
+    let sorted = strs.sort((a, b) => a < b ? -1 : 1);
+    let output = [];
+    let firstword = sorted[0];
+    let lastword = sorted[sorted.length - 1];
+    for (let i = 0; i < firstword.length; i++) {
+        if (firstword[i] == lastword[i]) {
+            output.push(firstword[i]);
+        }
+        else {
+            break;
+        }
+    }
+    return output.join("");
+}
+;
+console.log(longestCommonPrefixes(strs));
