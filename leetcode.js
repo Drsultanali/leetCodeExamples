@@ -77,7 +77,9 @@ let target = 9;
 console.log(twoSum(nums, target));
 //Example No-4:
 /*Write a function to find the longest common prefix string amongst an array of strings.
-If there is no common prefix, return an empty string "".*/
+If there is no common prefix, return an empty string "".
+e.g: Input: strs = ["flower","flow","flight"]
+    Output: "fl"*/
 function longestCommonPrefix(strs) {
     if (strs.length === 0) {
         return "";
@@ -112,3 +114,38 @@ function longestCommonPrefixes(strs) {
 }
 ;
 console.log(longestCommonPrefixes(strs));
+//Question No-5:
+/*Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+
+An input string is valid if:
+
+Open brackets must be closed by the same type of brackets.
+Open brackets must be closed in the correct order.
+Every close bracket has a corresponding open bracket of the same type.*/
+function isValid(str) {
+    let stack = [];
+    const opneBrackets = "({[";
+    const closeBrackets = ")}]";
+    for (let char of str) {
+        if (opneBrackets.includes(char)) {
+            stack.push(char);
+        }
+        else {
+            if (closeBrackets.includes(char)) {
+                if (stack.length === 0) {
+                    return false;
+                }
+                let top = stack.pop();
+                if ((char === ")" && top !== "(") ||
+                    (char === "}" && top !== "{") ||
+                    (char === "]" && top !== "[")) {
+                    return false;
+                }
+            }
+        }
+    }
+    return stack.length === 0;
+}
+;
+let str = "({{{{}}}))";
+console.log(isValid(str));
