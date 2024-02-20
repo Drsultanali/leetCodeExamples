@@ -155,3 +155,33 @@ function isValid(str: string): boolean {
 };
 let str : string = "({{{{}}}))";
 console.log(isValid(str));
+
+//Qustion No-6:
+/*Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.
+Example 1:
+Input: n = 3
+Output: ["((()))","(()())","(())()","()(())","()()()"]
+Example 2:
+Input: n = 1
+Output: ["()"]
+ */
+function generateParenthesis(n: number): string[] {
+    function generate(partial: string, left: number, right: number) {
+        if (right === 0 && left === 0) {
+            result.push(partial)
+            return;
+        }
+        if (left > 0) {
+            generate(partial + "(", left -1, right);
+        }
+        if (right > left) {
+            generate(partial + ")" , left, right -1);
+        }
+    }
+    const result: string[] = [];
+    generate("" ,n, n);
+    return result;
+};
+const n: number = 3;
+const output: string[] = generateParenthesis(n);
+console.log(output);

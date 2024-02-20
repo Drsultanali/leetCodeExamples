@@ -116,12 +116,13 @@ function longestCommonPrefixes(strs) {
 console.log(longestCommonPrefixes(strs));
 //Question No-5:
 /*Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
-
 An input string is valid if:
-
 Open brackets must be closed by the same type of brackets.
 Open brackets must be closed in the correct order.
-Every close bracket has a corresponding open bracket of the same type.*/
+Every close bracket has a corresponding open bracket of the same type.
+e.g:
+Input: s = "()"
+Output: true*/
 function isValid(str) {
     let stack = [];
     const opneBrackets = "({[";
@@ -149,3 +150,33 @@ function isValid(str) {
 ;
 let str = "({{{{}}}))";
 console.log(isValid(str));
+//Qustion No-6:
+/*Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.
+Example 1:
+Input: n = 3
+Output: ["((()))","(()())","(())()","()(())","()()()"]
+Example 2:
+Input: n = 1
+Output: ["()"]
+ */
+function generateParenthesis(n) {
+    function generate(partial, left, right) {
+        if (right === 0 && left === 0) {
+            result.push(partial);
+            return;
+        }
+        if (left > 0) {
+            generate(partial + "(", left - 1, right);
+        }
+        if (right > left) {
+            generate(partial + ")", left, right - 1);
+        }
+    }
+    const result = [];
+    generate("", n, n);
+    return result;
+}
+;
+const n = 3;
+const output = generateParenthesis(n);
+console.log(output);
